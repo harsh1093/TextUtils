@@ -1,16 +1,16 @@
 
 import './App.css';
 import Alert from './component/Alert';
-import About from './component/About';
+// import About from './component/About';
 import Navbar from './component/Navbar';
 import TextForm from './component/TextForm';
 import React, {useState} from 'react';
-import {
-  BrowserRouter as Router,
-  Routes,
-  Route,
-  Link
-} from "react-router-dom";
+// import {
+//   BrowserRouter as Router,
+//   Routes,
+//   Route,
+//   Link
+// } from "react-router-dom";
 
 
 function App() {
@@ -44,14 +44,15 @@ function App() {
 
   return (
     <>
-    <Router>
+    {/* <Router> */}
       <Navbar title= "Text Utils" mode={mode} toggleMode={toggleMode} />
       <Alert alert={alert} />
-      <Routes>
-          <Route exact path="/about" element={<About mode={mode} />}/>
-          <Route excat path="/" element={<TextForm headings= "Enter Text to Analyse" mode= {mode} showAlert={showAlert}/>}/>
-        </Routes>
-      </Router>
+      <TextForm headings= "Enter Text to Analyse" mode= {mode} showAlert={showAlert}/>
+      {/* <Routes> */}
+          {/* <Route exact path="/about" element={<About mode={mode} />}/> */}
+          {/* <Route excat path="/" element={<TextForm headings= "Enter Text to Analyse" mode= {mode} showAlert={showAlert}/>}/> */}
+        {/* </Routes> */}
+      {/* </Router> */}
     </>
   );
 }
