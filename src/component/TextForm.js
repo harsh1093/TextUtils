@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 
 
 export default function TextForm(props) {
-    const [text, setText] = useState('Enter Text Here');
+    const [text, setText] = useState('');
 
     const handleUpClick = () => {
         let newText = text.toLocaleUpperCase();
@@ -25,9 +25,7 @@ export default function TextForm(props) {
     }
 
     const handleCopy =() => {
-        let text= document.getElementById('myBox');
-        text.select();
-        navigator.clipboard.writeText(text.value);
+        navigator.clipboard.writeText(text);
         props.showAlert("Text Copied", "success");
     };
 
@@ -44,14 +42,14 @@ export default function TextForm(props) {
                 <h1>{props.headings}</h1>
                 <div className="mb-3">
                     <textarea className="form-control" style={{backgroundColor: props.mode==='light'? 'white': 'black', color: props.mode==='light'? 'black': 'white'}} 
-                    value={text} onChange={handleOnChange} id="myBox" rows="8"></textarea>
+                    value={text} onChange={handleOnChange} id="myBox" rows="8" placeholder='Enter Text Here'></textarea>
                 </div>
                 <div className="d-grid gap-2 d-md-flex justify-content-md-end">
-                    <button className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} onClick={handleUpClick} >Convert to UpperCase </button>
-                    <button className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} onClick={handleLowClick} >Convert to LowerCase </button>
-                    <button className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} onClick={handleClearClick} >Clear Text </button>
-                    <button className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} onClick={handleCopy} >Copy Text </button>
-                    <button className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} onClick={handleExtraSpace} >Remove Extra Spaces </button>
+                    <button disabled={text.length===0} className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} onClick={handleUpClick} >Convert to UpperCase </button>
+                    <button disabled={text.length===0} className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} onClick={handleLowClick} >Convert to LowerCase </button>
+                    <button disabled={text.length===0} className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} onClick={handleClearClick} >Clear Text </button>
+                    <button disabled={text.length===0} className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} onClick={handleCopy} >Copy Text </button>
+                    <button disabled={text.length===0} className={`btn btn-${props.mode === 'light' ? 'dark' : 'secondary'}`} onClick={handleExtraSpace} >Remove Extra Spaces </button>
 
                 </div>
             </div>
@@ -61,7 +59,7 @@ export default function TextForm(props) {
                 <p>{text.trim() === '' ? 0 : text.match(/\S+/g).length} words and {text.replace(/\s+/g, '').length} characters</p>
                 <p>{text.trim()===''? 0: 0.008 * text.split(/\S+/g).length} Minutes to read</p>
                 <h3>Text Preview</h3>
-                <p>{text.length>0? text: "Enter Something into Text Area to Preview Here"}</p>
+                <p>{text.length>0? text: "Nothing to Preview"}</p>
             </div>
         </>
     )
